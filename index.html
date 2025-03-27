@@ -28,75 +28,83 @@
             </nav>
         </header>
         <main>
-            <div class="container">
-                <form action="/connection.html" id="formulaires" class="JS-form">
-                    <!---- NOM ----->
-                    <div>
-                        <label for="nom">Nom</label>
-                        <input type="text" id="nom" name="nom" placeholder="Saisie ton nom...">
-                    </div>
-                    <!---- EMAIL ----->
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Saisie ton email...">
-                    </div>
-                    <!---- TELEPHONE NUMBER ----->
-                    <div>
-                        <label for="number">Numero de Téléphone</label>
-                        <input type="number" name="number" id="number">
-                    </div>
-                    <!---- LISTE LOGEMENTS ----->
-                    <label for="logements">Choisissez votre logement :</label>
-                    <select name="logements" id="logementsZbnb">
-                    <option value="">-- Logements --</option>
-                    <option value="maison">Maison</option>
-                    <option value="appartement">Appartement</option>
-                    </select>
-                    <!---- LISTE NB PERSONNES ----->
-                    <label for="personnes">Nombre de personnes :</label>
-                    <select name="personnes" id="nbPersonnes">
-                    <option value="">-- Nombre personnes --</option>
-                    <option value="personneone">1</option>
-                    <option value="personnetwo">2</option>
-                    <option value="personnetwo">3</option>
-                    <option value="personnetwo">4</option>
-                    </select>
-                    <!---- DATE DEPART ----->
-                    <div>
-                        <label for="datedepart">Date</label>
-                        <input type="date" name="dateDepart">
-                    </div>
-                    <!---- DATE ARRIVEE ----->
-                    <div>
-                        <label for="datearrive">Date</label>
-                        <input type="date" name="dateArrive">
-                    </div>
-                    <!---- SERVICE SUPPLEMENTAIRE ----->
-                    <div>
-                        <label for="accept">Services supplémentaires</label>
-                        <input type="checkbox" name="accept" id="accept">
-                        <!--- Block HIDDEN -->
-                        <div class="service-supp" id="serviceSupp">
+            <section class="formulaires">
+                <div class="title">
+                    <h1>Zbnb</h1>
+                    <p>le site de reservation de logements</p>
+                </div>
+                <div class="container-formulaire">
+                    <form action="/connection.html" id="formulaires" class="form-container">
+                        <!---- NOM ----->
+                        <div>
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Saisie ton nom...">
+                        </div>
+                        <!---- EMAIL ----->
+                        <div>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Saisie ton email...">
+                        </div>
+                        <!---- TELEPHONE NUMBER ----->
+                        <div>
+                            <label for="number">Numero de Téléphone</label>
+                            <input type="text" name="number" id="number">
+                        </div>
 
+                        <!---- LISTE LOGEMENTS ----->
+                        <div class="logements">
+                            <label for="logements">Choisissez votre logement :</label>
+                            <select name="logements" id="logementsZbnb">
+                                <option value="">-- Logements --</option>
+                                <option value="maison">Maison</option>
+                                <option value="appartement">Appartement</option>
+                            </select>
+                        </div>
+                        <!---- LISTE NB PERSONNES ----->
+                        <div class="nombre-personne">
+                            <label for="personnes">Nombre de personnes :</label>
+                            <select name="personnes" id="nbPersonnes">
+                                <option value="">-- Nombre personnes --</option>
+                                <option value="personneone">1</option>
+                                <option value="personnetwo">2</option>
+                                <option value="personnetwo">3</option>
+                                <option value="personnetwo">4</option>
+                            </select>
+                        </div>
+                        <!---- DATE DEPART ----->
+                        <div class="depart">
+                            <label for="datedepart">Date</label>
+                            <input type="date" name="dateDepart">
+                        </div>
+                        <!---- DATE ARRIVEE ----->
+                        <div class="arrivee">
+                            <label for="datearrive">Date</label>
+                            <input type="date" name="dateArrive">
+                        </div>
+                        <!---- SERVICE SUPPLEMENTAIRE ----->
+                        <div>
+                            <label for="accept">Services supplémentaires :</label>
                             <!--- Chauffeur -->
                             <label for="chauffeur">Chauffeur</label>
                             <input type="checkbox" name="chauffeur" id="suppChauffeur">
-
                             <!--- Petit dejeuner -->
                             <label for="ptdejeuner">Petit dejeuner</label>
                             <input type="checkbox" name="suppdejeuner" id="suppDejeuner">
-
                             <!--- Guide -->
                             <label for="guide">Guide</label>
                             <input type="checkbox" name="suppguide" id="suppGuide">
+                            <!--- Regime alimentaire Hidden -->
+                            <div class="regime-hidden" id="regimeHidden">
+                                <label for="regime">Regime alimentaire</label>
+                                <input type="checkbox" name="regime" id="regimeAlimentaire">
+                                <p>Oui</p>
+                                <input type="checkbox" name="regime" id="regimeAlimentaire">
+                                <p>Non</p>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <div class="title">
-                    <h1>Le Bon Coin</h1>
+                    </form>
                 </div>
-            </div>
-            <h1>Logement</h1>
+            </section>
             <!--- AJOUT DES DATAS DU FICHIER JSON --->
             <div id="container-logement"></div>
         </main>

@@ -55,19 +55,20 @@ fetch( "zenbnb_listing_40.json" )
         //-----------------------------------------------------------------------------//
         //
         // CREATION DIV POUR RATTACHER LES DONNEES
-        let divHomePage = document.createElement( "container-homepage" );
+        let divHomePage = document.createElement( "container" );
+        //
+        //Ajout class pour logement
+        divHomePage.classList = "logement";
         //
         // RECUPERATION DES DATAS (Possible de concaténation)
         // 
         //  AUCUN FILTRE POUR LA HOME PAGE
         // 
-        let htmlHomePage = "<p>" + listingsAll.title;
+        let htmlHomePage = "<img src=' " + listingsAll.image + " '/>";
+        htmlHomePage += "<p>" + listingsAll.title;
         htmlHomePage += "<p>" + listingsAll.city;
         htmlHomePage += "<p>" + "Prix par mois du logement:"+ " " + listingsAll.price_per_night;
         htmlHomePage += "<p>" + "Note Avis:"+ " " + listingsAll.rating;
-        //
-        // PROBLEME IMG
-        htmlHomePage += "<img src=' " + listingsAll.image + " '/>";
         //---------------------------------------------------//
                         // RESULTAT HOME PAGE //
         //---------------------------------------------------//
