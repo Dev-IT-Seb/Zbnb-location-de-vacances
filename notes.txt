@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+                                NOTES
+---------------------------------------------------------------------------------------------------------------------------------------
+JSON (principalement hebergé sur un serveur)
+(c'est comme un tablau d'objet)
+fichier dynamique
+(produits, des données...)
+-------------------
+ID (unique)
+-----------
+Nom de la base > Categories > ID > clefs (données) 
+---------------------------------------------------------------------------------------------------------------------------------------
+Dans fichier JS :
+---------------------------
+Pour chercher les données :
+
+1. fetch("Pointer sur nom du fichiers.json ou URL(dynamque)")
+
+2. then(function (response)) ("et ensuite" promesse si résolu)
+
+3.(Condition) if (!response.ok) et "throw" -> donc le fichier n'a pas été chargé (toujours testé si le fichier est bien chargé)
+
+4. ".then(function(data)" -> function pour les données){
+	
+	5. Création d'une variable -> récupérer un élément HTML
+	6. Parcourir les éléments (boucle for)
+	7. Ajouter balise html via JS (par exemple "p")
+	8. variable.document.createElement("p") (pour injecter des données dedans)
+	9. 
+} 
+
+---------------------------------------------------------------------------------------------------------------------------------------
