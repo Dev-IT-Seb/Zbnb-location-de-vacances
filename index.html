@@ -3,13 +3,14 @@
     <head>  
         <link rel="icon" type="image/png" href="#">
         <meta charset="UTF-8">
-        <meta name="description" content="test avec JS">
-        <title>Json</title>
+        <meta name="description" content="L'agence de location de vacances qui vous permettra de vous reposer !">
+        <title>ZBNB L'agence de location de vacances</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
         <header>
+            <!--- NAVBAR-->
             <nav>
                 <ul>
                     <li>
@@ -29,13 +30,14 @@
         </header>
         <main>
             <section class="formulaires">
+                <!--- TITLE -->
                 <div class="title">
                     <h1>Zbnb</h1>
                     <p>le site de reservation de logements</p>
                 </div>
                 <!--- FORMULAIRES -->
                 <div class="container-formulaire">
-                    <form action="/connection.html" id="formulaires" class="form-container">
+                    <form action="#" id="formulaires" class="form-container">
                         <!---- NOM ----->
                         <div>
                             <label for="nom">Nom</label>
@@ -51,20 +53,20 @@
                             <label for="number">Numero de Téléphone</label>
                             <input type="text" name="number" id="number">
                         </div>
-
                         <!---- LISTE LOGEMENTS ----->
                         <div class="logements">
-                            <label for="logements">Choisissez votre logement :</label>
+                            <label for="logementsZbnb">Choisissez votre logement :</label>
                             <select name="logements" id="logementsZbnb">
                                 <option value="">-- Logements --</option>
                                 <option value="maison" id="home">Maison</option>
                                 <option value="appartement" id="appartment">Appartement</option>
                             </select>
+                            <!--- JS RESULTAT LOGEMENT-->
+                            <div class="choix-logement"></div>
                         </div>
-
                         <!---- LISTE NB PERSONNES ----->
                         <div class="nombre-personne">
-                            <label for="personnes">Nombre de personnes :</label>
+                            <label for="nbPersonnes">Nombre de personnes :</label>
                             <select name="personnes" id="nbPersonnes">
                                 <option value="">-- Nombre personnes --</option>
                                 <option value="personneone" id="personneOne">1</option>
@@ -73,55 +75,64 @@
                                 <option value="personnefour" id="personneFour">4</option>
                             </select>
                         </div>
-
                         <!---- DATE DEPART ----->
                         <div class="depart">
-                            <label for="datedepart">Date</label>
-                            <input type="date" name="dateDepart" class="dateDepart">
+                            <label for="dateDepart">Date</label>
+                            <input type="date" name="dateDepart" id="dateDepart">
                         </div>
-
                         <!---- DATE ARRIVEE ----->
                         <div class="arrivee">
-                            <label for="datearrive">Date</label>
-                            <input type="date" name="dateArrive" class="dateArrive">
+                            <label for="dateArrive">Date</label>
+                            <input type="date" name="dateArrive" id="dateArrive">
                         </div>
-
                         <!---- SERVICE SUPPLEMENTAIRE ----->
                         <div>
-
                             <label for="accept">Services supplémentaires :</label>
-
                             <!--- Chauffeur -->
                             <label for="chauffeur">Chauffeur</label>
                             <input type="checkbox" name="chauffeur" id="suppChauffeur">
-                            
                             <!--- Guide -->
                             <label for="guide">Guide</label>
                             <input type="checkbox" name="suppguide" id="suppGuide">
-
                             <!--- Petit dejeuner -->
                             <label for="ptdejeuner">Petit dejeuner</label>
                             <input type="checkbox" name="suppdejeuner" id="suppDejeuner">
-
                             <!--- Regime alimentaire Hidden -->
                             <div class="regime-hidden">
-                                <label for="regime">Regime alimentaire</label>
-                                <input type="checkbox" name="regime" id="regimeAlimentaireTrue">
-                                <p>Oui</p>
-                                <input type="checkbox" name="regime" id="regimeAlimentaireFalse">
-                                <p>Non</p>
+                                <div class="title">
+                                    <p>Regime alimentaire</p>
+                                </div>
+                                <!--- Choix regime --->
+                                <div class="choix-regime">
+                                    <p>Oui</p>
+                                    <input type="checkbox" name="regime" id="regimeAlimentaireTrue">
+                                    <p>Non</p>
+                                    <input type="checkbox" name="regime" id="regimeAlimentaireFalse">
+                                </div>
                             </div>
-
-
+                            <!---- ENVOYER ----->
+                            <div class="cta-recherche">
+                                <input type="submit" value="Rechercher" id="search">
+                            </div>
                         </div>
                     </form>
+                    <!---- RESULTAT RESERVATION FORMULAIRE ----->
+                    <div class="resultat-reservation"></div>
+                </div>
+                <div class="logement-resultat">
+                    <!--- TITLE LOGEMENTS -->
+                    <div class="title">
+                        <h3>Nos logements</h3>
+                    </div>
+                    <!--- AJOUT DES DATAS DU FICHIER JSON --->
+                    <section class="container-cards">
+                        <div id="container-logement"></div>
+                    </section>
                 </div>
             </section>
-            <!--- AJOUT DES DATAS DU FICHIER JSON --->
-            <div id="container-logement"></div>
         </main>
         <footer>
         </footer>
+        <script src="./script.js"></script> 
     </body>
-    <script src="./script.js"></script> 
 </html>

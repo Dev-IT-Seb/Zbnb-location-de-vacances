@@ -1,10 +1,14 @@
 // ------------------------------------------ //
         // JS - JSON + FORMULAIRES //
 // ------------------------------------------ //
+// A FAIRE - DERNIER PARTIE DU FORMULAIRE + 
+//  LOCALSTORAGE A TESTER
+// ------------------------------------------ //
+//
 // IMPORTATION DU FICHIER JSON
 fetch( "zenbnb_listing_40.json" )
-// ------------------------------------------ //
-
+//
+//
 // ------------------------------------------ //
 // CHARGEMENT DU FICHIER OK ou NOK
 .then(function(verif){
@@ -33,8 +37,9 @@ fetch( "zenbnb_listing_40.json" )
         // TELEPHONE UTILISATEUR
         let numberPhone = document.getElementById("number");
         // TYPE LOGEMENTS
-        let logementHome = document.getElementById("home");
-        let logementAppartment = document.getElementById("appartment");
+        let logementZbnb = document.getElementById("logementsZbnb");
+        //Ajout resultat choix
+        let choixLogement = document.querySelector(".choix-logement");
         // A VOIR SINON BOUCLE - A TESTER
         let personneOne = document.getElementById("personneOne");
         let personneTwo = document.getElementById("personneTwo");
@@ -42,7 +47,7 @@ fetch( "zenbnb_listing_40.json" )
         let personneFour = document.getElementById("personneFour");
         // DATE
         let dateDepart = document.querySelector(".dateDepart");
-        let dateArrive = document.querySelector("dateArrive");
+        let dateArrive = document.querySelector(".dateArrive");
         // CHAUFFEUR
         let suppChauffeur = document.getElementById("suppChauffeur");
         // PETIT DEJEUNER
@@ -54,6 +59,10 @@ fetch( "zenbnb_listing_40.json" )
         let regimeFalse = document.getElementById("regimeAlimentaireFalse");
         // OPTION AFFICHAGE REGIME
         let regimeHidden = document.querySelector(".regime-hidden");
+        //--- AFFICHAGE RESULTAT COMMANDE RESERVATION
+        let resultReservation = document.querySelector(".resultat-reservation");
+        // BUTTON ENVOIE DU RESULTAT
+        let buttonFormulaire = document.getElementById("search");
         //---------------------------------------------------//
         //
         //--- OPTIONS REGIME ALIMENTAIRE
@@ -68,7 +77,61 @@ fetch( "zenbnb_listing_40.json" )
             }
         });
         //---------------------------------------------------//
-        //--- RECUPERATION NOM
+                    //--- LOGEMENTS ---//
+        //---------------------------------------------------//
+        //
+        logementZbnb.addEventListener("change", function() {
+
+            let selectionChoix = logementZbnb.value;
+
+            if (selectionChoix === "maison") {
+
+                let contentHtmlChoixMaison = `
+                <div class="choix-maison-option">
+                    <label for="pi">Piscine</label>
+                    <input type="checkbox" name="piscine" id="piscineMaison">
+                    <label for="pi">Jardin</label>
+                    <input type="checkbox" name="jardin" id="jardinMaison">
+                </div>`;
+                choixLogement.innerHTML = contentHtmlChoixMaison;
+            } else if (selectionChoix === "appartement") {
+
+                let contentHtmlChoixAppartement = `
+                <div class="choix-maison-option">
+                    <label for="balcon">Balcon</label>
+                    <input type="checkbox" name="balcon" id="balconAppartment">
+                    <label for="ascenceur">Ascenseur</label>
+                    <input type="checkbox" name="ascenceur" id="ascenceurAppartment">
+                </div>`;
+                choixLogement.innerHTML = contentHtmlChoixAppartement;
+            } else {
+                choixLogement.textContent = "";
+            }
+        });
+        //---------------------------------------------------//
+                //--- RECUPERATION VALEURS SAISIES ---//
+        //---------------------------------------------------//
+        let tableauError = [];
+
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        //---- BOUTON FORMULAIRE
+        buttonFormulaire.addEventListener("click", function(event){
+
+            //--- Empeche le rechargement de la page
+            event.preventDefault();
+
+            //--- TABLEAU ERREUR 
+            tableauError = [];
+
+            //--- VIDE LE CONTENU DU DOM SELECTOR HTML
+            resultReservation.innerHTML = "";
+
+            //--- VERIFICATION LONGUEUR NOM
+            if(nameUser.value.length < 3){tableauError.push("Votre nom doit contenir au moins 3 caractères.");}
+
+            //--- VERIFICATION MAIL REGEX
+            if(!emailRegex.test(mailUser.value)) {tableauError.push("Adresse email invalide: " + mailUser.value);}
 
 
 
@@ -86,6 +149,37 @@ fetch( "zenbnb_listing_40.json" )
 
 
 
+            //---------------------------------------------------// 
+            //--- VERIFICATION DATA DANS TABLEAU ET AFFICHAGE
+            //
+            // ERREURS + AFFICHAGE
+            if (tableauError.length > 0) {
+
+                // VALEUR VIDE AU DEBUT
+                let errorList = "";
+            
+                // BOUCLE POUR RECUPERER LES ERREUR + AJOUT DATA DANS BALISE HTML
+                for (let i = 0; i < tableauError.length; i++) {
+                    errorList += `<li>${tableauError[i]}</li>`;
+                }
+            
+                //--- BLOCK HTML MESSAGE ERREUR
+                let contentHtmlResultat = `
+                    <h2 class="red-nok">Erreurs dans ce formulaire</h2>
+                    <ul>
+                        ${errorList}
+                    </ul>`;
+            
+                // AJOUT DANS DOM HTML
+                resultReservation.innerHTML = contentHtmlResultat;
+            
+            } else {
+            
+                //--- BLOCK HTML MESSAGE FORMULAIRE OK
+                let contentHtmlResultat = `
+                    <h2 class="green-ok">Résultat de votre commande</h2>
+                    <p>Votre nom: ${nameUser.value}</p>
+                    <p>Votre email: ${mailUser.value}</p>
 
 
 
@@ -101,17 +195,27 @@ fetch( "zenbnb_listing_40.json" )
 
 
 
+                `;
+                //
+                //--- AJOUT DANS DOM HTML
+                resultReservation.innerHTML = contentHtmlResultat;
+            }
+        });
+        //
+        //--------------------------------------------------//
+        // LOCAL STORAGE A TESTER
+        // document.addEventListener("DOMContentLoaded", function(){
 
+        //     let saveName = localStorage.getItem("nom");
 
+        //     if(saveName){
 
+        //         resultReservation.textContent = saveName;
 
+        //     }
 
-
-
-
-
-
-
+        // });
+        //---------------------------------------------------//
     //-----------------------------------------------------------------------------//
 //                           PARTIE RECUPERATION DATA                              //
     //-----------------------------------------------------------------------------//
@@ -133,7 +237,7 @@ fetch( "zenbnb_listing_40.json" )
         let listingsAll = data.listings[z];
         //
         //-----------------------------------------------------------------------------//
-        //                              BLOCK - HOME PAGE                              //
+        //---                          BLOCK - HOME PAGE                            ---//
         //-----------------------------------------------------------------------------//
         //
         // CREATION DIV POUR RATTACHER LES DONNEES
@@ -146,11 +250,15 @@ fetch( "zenbnb_listing_40.json" )
         // 
         //  AUCUN FILTRE POUR LA HOME PAGE
         // 
-        let htmlHomePage = "<img src=' " + listingsAll.image + " '/>";
+        let htmlHomePage = "<img src='" + "./images/logement/logement.jpg" + "'/>";
         htmlHomePage += "<p>" + listingsAll.title;
         htmlHomePage += "<p>" + listingsAll.city;
-        htmlHomePage += "<p>" + "Prix par mois du logement:"+ " " + listingsAll.price_per_night;
-        htmlHomePage += "<p>" + "Note Avis:"+ " " + listingsAll.rating;
+        htmlHomePage += `
+            <div class="item">
+                <p>${listingsAll.price_per_night}€</p>
+                <p>Note Avis: ${listingsAll.rating} €</p>
+            </div>
+        `;
         //---------------------------------------------------//
                         // RESULTAT HOME PAGE //
         //---------------------------------------------------//
@@ -159,7 +267,7 @@ fetch( "zenbnb_listing_40.json" )
         divHomePage.innerHTML = htmlHomePage;
         //
         //-----------------------------------------------------------------------------//
-        //                              BLOCK - PARIS                                  //
+        //---                              BLOCK - PARIS                            ---//
         //-----------------------------------------------------------------------------//
         //
         // CREATION DIV POUR RATTACHER LES DONNEES
@@ -179,14 +287,14 @@ fetch( "zenbnb_listing_40.json" )
             htmlParis += "<p>" + listingsAll.image;
         //
         //---------------------------------------------------//
-                        // RESULTAT PARIS //
+        //---               RESULTAT PARIS                ---//
         //---------------------------------------------------//
         //
         // AJOUT DU CONTENU PARIS
             divParis.innerHTML = htmlParis;
         };
         //-----------------------------------------------------------------------------//
-        //                              BLOCK - LYON                                   //
+        //---                              BLOCK - LYON                             ---//
         //-----------------------------------------------------------------------------//
         //
         // CREATION DIV POUR RATTACHER LES DONNEES
@@ -207,7 +315,7 @@ fetch( "zenbnb_listing_40.json" )
             htmlLyon += "<p>" + listingsAll.image;
         //
         //---------------------------------------------------//
-                        // RESULTAT LYON //
+        //---                RESULTAT LYON                ---//
         //---------------------------------------------------//
         //
         // AJOUT DU CONTENU LYON
@@ -215,13 +323,13 @@ fetch( "zenbnb_listing_40.json" )
         };
         //
         //-----------------------------------------------------------------------------//
-        //                              BLOCK - NOTES                                  //
+        //---                              BLOCK - NOTES                            ---//
         //-----------------------------------------------------------------------------//
         //
         // CREATION DIV POUR RATTACHER LES DONNEES
         let divNotes = document.createElement( "logement-notes" );
         //
-        // Condition Filtre logement Lyon
+        // Condition Filtre NOTES
         //
         if ( listingsAll.rating > 4 ){
             //
@@ -234,7 +342,7 @@ fetch( "zenbnb_listing_40.json" )
         //
         //
         //---------------------------------------------------//
-                        // RESULTAT NOTES //
+        //---               RESULTAT NOTES                ---//
         //---------------------------------------------------//
         //
         // AJOUT DU CONTENU NOTES
@@ -242,14 +350,14 @@ fetch( "zenbnb_listing_40.json" )
         };
         //
         //---------------------------------------------------//
-                // CONDITIONS PAGES AJOUT ELEMENT DOM //
+        //---      CONDITIONS PAGES AJOUT ELEMENT DOM     ---//
         //---------------------------------------------------//
         // AFFICHAGE DES RESULTATS POUR CHAQUE PAGE - CONDITION POUR REDIRIGER VERS L'ELEMENT DE LA BONNE PAGE
         if (LogementsContainer){
             LogementsContainer.appendChild(divHomePage);
         }
         //AFFICHAGE DES RESULTATS
-        // AppendChild -> Ajoute l'élément HTML enfant à la fin d'un élément parent
+        //
         else if (LogementsContainerParis){
             LogementsContainerParis.appendChild(divParis);
         }else if (LogementsContainerLyon) {
@@ -259,4 +367,4 @@ fetch( "zenbnb_listing_40.json" )
         }
     };
 });
-//---------------------------------------------------//
+//------------------------------------------------------------------------------------------//
