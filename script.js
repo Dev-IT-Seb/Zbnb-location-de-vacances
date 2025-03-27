@@ -1,12 +1,11 @@
 // ------------------------------------------ //
-            // JS - JSON EXERCICES //
-// ------------------------------------------ //
-                // HOME PAGE //
+        // JS - JSON + FORMULAIRES //
 // ------------------------------------------ //
 // IMPORTATION DU FICHIER JSON
 fetch( "zenbnb_listing_40.json" )
 // ------------------------------------------ //
-//
+
+// ------------------------------------------ //
 // CHARGEMENT DU FICHIER OK ou NOK
 .then(function(verif){
 
@@ -21,27 +20,110 @@ fetch( "zenbnb_listing_40.json" )
 // RECUPERATION DES DONNEES
 //
 .then(function(data){
-    //
-    //
-    //--------------------------------------------------------//
-               // SELECTION DES ELEMENTS DANS JSON //
-    //--------------------------------------------------------//
-    //
-    // AFFICHAGE DES LOGEMENTS
-    // POINTER SUR LES BALISES HTML
-    //
+
+        //---------------------------------------------------//
+                        //-- FORMULAIRES --//
+        //---------------------------------------------------//
+        //--- SELECTEURS DOM
+        //
+        // NOM UTILISATEUR
+        let nameUser = document.getElementById("nom");
+        // MAIL UTILISATEUR
+        let mailUser = document.getElementById("email");
+        // TELEPHONE UTILISATEUR
+        let numberPhone = document.getElementById("number");
+        // TYPE LOGEMENTS
+        let logementHome = document.getElementById("home");
+        let logementAppartment = document.getElementById("appartment");
+        // A VOIR SINON BOUCLE - A TESTER
+        let personneOne = document.getElementById("personneOne");
+        let personneTwo = document.getElementById("personneTwo");
+        let personneThree = document.getElementById("personneThree");
+        let personneFour = document.getElementById("personneFour");
+        // DATE
+        let dateDepart = document.querySelector(".dateDepart");
+        let dateArrive = document.querySelector("dateArrive");
+        // CHAUFFEUR
+        let suppChauffeur = document.getElementById("suppChauffeur");
+        // PETIT DEJEUNER
+        let suppDejeuner = document.getElementById("suppDejeuner");
+        // GUIDE
+        let suppGuide = document.getElementById("suppGuide");
+        // REGIME ALIMENTAIRE
+        let regimeTrue = document.getElementById("regimeAlimentaireTrue");
+        let regimeFalse = document.getElementById("regimeAlimentaireFalse");
+        // OPTION AFFICHAGE REGIME
+        let regimeHidden = document.querySelector(".regime-hidden");
+        //---------------------------------------------------//
+        //
+        //--- OPTIONS REGIME ALIMENTAIRE
+        suppDejeuner.addEventListener("click", function() {
+            
+            if (regimeHidden.style.display === "none") {
+                // AFFICHE LES OPTIONS
+                regimeHidden.style.display = "block";
+            } else {
+                // ENLEVE LES OPTIONS
+                regimeHidden.style.display = "none";
+            }
+        });
+        //---------------------------------------------------//
+        //--- RECUPERATION NOM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------//
+//                           PARTIE RECUPERATION DATA                              //
+    //-----------------------------------------------------------------------------//
+    //--- SELECTEURS DOM
     // HOME PAGE
     let LogementsContainer = document.getElementById( "container-logement" );
-    //
     // PARIS
     let LogementsContainerParis = document.getElementById( "logement-paris" );
-    //
     // LYON
     let LogementsContainerLyon = document.getElementById( "logement-lyon" );
-    //
     // NOTES
     let LogementsContainerNotes = document.getElementById( "logement-notes" );
-    //
     //-------------------------------------------------------------------//
       // BOUCLE POUR LISTER TOUS LES ELEMENTS DANS CATEGORIE "LISTINGS" //
     //-------------------------------------------------------------------//
@@ -162,14 +244,10 @@ fetch( "zenbnb_listing_40.json" )
         //---------------------------------------------------//
                 // CONDITIONS PAGES AJOUT ELEMENT DOM //
         //---------------------------------------------------//
-        //
-        //
         // AFFICHAGE DES RESULTATS POUR CHAQUE PAGE - CONDITION POUR REDIRIGER VERS L'ELEMENT DE LA BONNE PAGE
         if (LogementsContainer){
             LogementsContainer.appendChild(divHomePage);
-        } 
-        //
-        //
+        }
         //AFFICHAGE DES RESULTATS
         // AppendChild -> Ajoute l'élément HTML enfant à la fin d'un élément parent
         else if (LogementsContainerParis){

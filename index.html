@@ -33,6 +33,7 @@
                     <h1>Zbnb</h1>
                     <p>le site de reservation de logements</p>
                 </div>
+                <!--- FORMULAIRES -->
                 <div class="container-formulaire">
                     <form action="/connection.html" id="formulaires" class="form-container">
                         <!---- NOM ----->
@@ -56,51 +57,62 @@
                             <label for="logements">Choisissez votre logement :</label>
                             <select name="logements" id="logementsZbnb">
                                 <option value="">-- Logements --</option>
-                                <option value="maison">Maison</option>
-                                <option value="appartement">Appartement</option>
+                                <option value="maison" id="home">Maison</option>
+                                <option value="appartement" id="appartment">Appartement</option>
                             </select>
                         </div>
+
                         <!---- LISTE NB PERSONNES ----->
                         <div class="nombre-personne">
                             <label for="personnes">Nombre de personnes :</label>
                             <select name="personnes" id="nbPersonnes">
                                 <option value="">-- Nombre personnes --</option>
-                                <option value="personneone">1</option>
-                                <option value="personnetwo">2</option>
-                                <option value="personnetwo">3</option>
-                                <option value="personnetwo">4</option>
+                                <option value="personneone" id="personneOne">1</option>
+                                <option value="personnetwo" id="personneTwo">2</option>
+                                <option value="personnethree" id="personneThree">3</option>
+                                <option value="personnefour" id="personneFour">4</option>
                             </select>
                         </div>
+
                         <!---- DATE DEPART ----->
                         <div class="depart">
                             <label for="datedepart">Date</label>
-                            <input type="date" name="dateDepart">
+                            <input type="date" name="dateDepart" class="dateDepart">
                         </div>
+
                         <!---- DATE ARRIVEE ----->
                         <div class="arrivee">
                             <label for="datearrive">Date</label>
-                            <input type="date" name="dateArrive">
+                            <input type="date" name="dateArrive" class="dateArrive">
                         </div>
+
                         <!---- SERVICE SUPPLEMENTAIRE ----->
                         <div>
+
                             <label for="accept">Services supplémentaires :</label>
+
                             <!--- Chauffeur -->
                             <label for="chauffeur">Chauffeur</label>
                             <input type="checkbox" name="chauffeur" id="suppChauffeur">
-                            <!--- Petit dejeuner -->
-                            <label for="ptdejeuner">Petit dejeuner</label>
-                            <input type="checkbox" name="suppdejeuner" id="suppDejeuner">
+                            
                             <!--- Guide -->
                             <label for="guide">Guide</label>
                             <input type="checkbox" name="suppguide" id="suppGuide">
+
+                            <!--- Petit dejeuner -->
+                            <label for="ptdejeuner">Petit dejeuner</label>
+                            <input type="checkbox" name="suppdejeuner" id="suppDejeuner">
+
                             <!--- Regime alimentaire Hidden -->
-                            <div class="regime-hidden" id="regimeHidden">
+                            <div class="regime-hidden">
                                 <label for="regime">Regime alimentaire</label>
-                                <input type="checkbox" name="regime" id="regimeAlimentaire">
+                                <input type="checkbox" name="regime" id="regimeAlimentaireTrue">
                                 <p>Oui</p>
-                                <input type="checkbox" name="regime" id="regimeAlimentaire">
+                                <input type="checkbox" name="regime" id="regimeAlimentaireFalse">
                                 <p>Non</p>
                             </div>
+
+
                         </div>
                     </form>
                 </div>

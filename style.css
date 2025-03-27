@@ -5,12 +5,11 @@
     box-sizing: border-box;
 }
 /* -------------------------------- */
-main {
+body {
     background-image: url("./images/background/tahiti.jpg");
     background-repeat: no-repeat;
-}
-body {
     background-color: #000000;
+    background-size: cover; /* Optional: makes the image cover the entire body */
 }
 /* -------------------------------- */
 /* -------------------------------- */
@@ -73,13 +72,17 @@ header nav ul li a{
     padding: 1rem;
 }
 /*------------ Service supplementaire petit dejeuner  ------------------*/
+
+/* JS AFFICHER OPTION REGIME */
+
 .regime-hidden {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
     align-items: center; 
+    display: none;
 }
-
+/* -------------------------------- */
 #container-logement {
     display: flex;
     justify-content: center;
