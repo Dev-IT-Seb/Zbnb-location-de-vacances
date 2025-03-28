@@ -1,13 +1,13 @@
-// ------------------------------------------ //
-      //--- JS - JSON + FORMULAIRES ---//
-// ------------------------------------------ //
-//--- A FAIRE - VERIF DATE + LOCALSTORAGE A TESTER
-// ------------------------------------------ //
+// ---------------------------------------------------------------- //
+                //--- JS - JSON + FORMULAIRES ---//
+// ---------------------------------------------------------------- //
+//--- A FAIRE - TERMINER CALCUL DE PRIX TOTAL AVEC OPTIONS CHOISIES
+// ---------------------------------------------------------------- //
 //
 //--- IMPORTATION DU FICHIER JSON
 fetch( "zenbnb_listing_40.json" )
 //
-// ------------------------------------------ //
+// ---------------------------------------------------------------- //
 //--- CHARGEMENT DU FICHIER OK ou NOK
 .then(function(verif){
 
@@ -152,11 +152,14 @@ fetch( "zenbnb_listing_40.json" )
         if (!arriveeValue) {
             tableauError.push("La date d'arrivée est vide.");
         }
-
+        //------------------------------------------------------------------------------------//
         //--- CONVERTIR LA DATE
         let depart = new Date(departValue);
         let arrivee = new Date(arriveeValue);
-
+        //--- CALCUL DE LA DATE (NB de Jours)
+        let time_diff = arrivee.getTime() - depart.getTime();
+        let dayDiff = time_diff / (1000 * 3600 * 24);
+        //------------------------------------------------------------------------------------//
         //--- VERIFIER DATE
         if (depart.toString() === "Invalid Date") {
             tableauError.push("La date de départ est invalide.");
@@ -164,12 +167,12 @@ fetch( "zenbnb_listing_40.json" )
         if (arrivee.toString() === "Invalid Date") {
             tableauError.push("La date d'arrivée est invalide.");
         }
-
+        //------------------------------------------------------------------------------------//
         //--- VERIFICATION SI DATE DE DEPART EST APRES DATE D'ARRIVEE
         if (depart > arrivee) {
             tableauError.push("La date de départ ne peut pas être après la date d'arrivée.");
         }
-
+        //------------------------------------------------------------------------------------//
         //--- CONTENU MESSAGE D'ERREUR
         if (tableauError.length > 0) {
             let errorList = "";
@@ -185,6 +188,27 @@ fetch( "zenbnb_listing_40.json" )
         } 
         //--- CONTENU RESULTAT SANS ERREUR
         else {
+
+            //----------------------------------------------//
+            //--- CALCUL DES OPTIONS CHOISIES
+            //
+            //-- CHAUFFEUR
+            let priceChauffeur = 11;
+            let calculChauffeur = dayDiff + priceChauffeur
+            //
+            //-- PETIT-DEJEUNER (calculer le nombre de personne + le nombre de jour de reservation et si l'option petit-dejeuner et choisi + le prix du petit dejeuner)
+
+            //nbPersonnes
+            //dayDiff
+            //suppDejeuner ID COCHE
+            let prixOption = nbPersonnes + dayDiff;
+            if(suppDejeuner.checked){
+
+                console.log("petit dejeuner");
+                console.log(prixOption)
+        
+            }
+            //----------------------------------------------//
             let contentHtmlResultat = ` 
                 <h2 class="green-ok">Résultat de votre commande</h2>
                 <p>Votre nom : ${nameUser.value}</p>
@@ -192,10 +216,13 @@ fetch( "zenbnb_listing_40.json" )
                 <p>Votre numéro de téléphone : ${numberPhone.value}</p>
                 <p>Nombre de personnes : ${nbPersonnes}</p>
                 <p>Logement choisi : ${selectionChoix}</p>
-                <p>Date de départ: ${depart.toLocaleDateString()}</p>
-                <p>Date d'arrivée: ${arrivee.toLocaleDateString()}</p>
+                <p>Date de départ : ${depart.toLocaleDateString()}</p>
+                <p>Date d'arrivée : ${arrivee.toLocaleDateString()}</p>
+                <p>Prix chauffeur : ${calculChauffeur} €</p>
+                <p>Nombre de jours : ${dayDiff} jours</p>
+                <p>Prix total des petits-dejeuner : ${prixOption}</p>
                 <p>Options choisies : `;
-
+            //------------------------------------------------------------------------------------//
             //--- AFFICHAGE DES OPTIONS CHOISIES
             if (optionsChoisies.length > 0) {
                 contentHtmlResultat += optionsChoisies.join(", ");
@@ -217,7 +244,7 @@ fetch( "zenbnb_listing_40.json" )
             if (selectionRegime) {
                 contentHtmlResultat += ", Regime alimentaire : " + selectionRegime.value;
             }
-
+            //------------------------------------------------------------------------------------//
             //--- AJOUT PROGRESSIVE DES OPTIONS DANS LE RESULTAT OK
             contentHtmlResultat += `</p>`;
 
