@@ -152,7 +152,7 @@ header nav ul li a{
     font-weight: 600;
 }
 .logement p:nth-child(3){
-    color: #f00d0d;
+    color: #3e21e1;
     text-align: center;
     font-size: 21px;
     font-weight: 550;
@@ -214,7 +214,6 @@ header nav ul li a{
 .resultat-reservation h2{
     font-size: 20px;
 }
-/*------------*/
 .resultat-reservation ul{
     list-style: none;
     font-size: 18px;

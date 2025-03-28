@@ -1,16 +1,14 @@
 // ------------------------------------------ //
-        // JS - JSON + FORMULAIRES //
+      //--- JS - JSON + FORMULAIRES ---//
 // ------------------------------------------ //
-// A FAIRE - DERNIER PARTIE DU FORMULAIRE + 
-//  LOCALSTORAGE A TESTER
+//--- A FAIRE - VERIF DATE + LOCALSTORAGE A TESTER
 // ------------------------------------------ //
 //
-// IMPORTATION DU FICHIER JSON
+//--- IMPORTATION DU FICHIER JSON
 fetch( "zenbnb_listing_40.json" )
 //
-//
 // ------------------------------------------ //
-// CHARGEMENT DU FICHIER OK ou NOK
+//--- CHARGEMENT DU FICHIER OK ou NOK
 .then(function(verif){
 
     if (!verif.ok){
@@ -20,204 +18,216 @@ fetch( "zenbnb_listing_40.json" )
     console.log( "Chargement du fichier JSON OK !" )
     return verif.json(); 
 })
-//
-// RECUPERATION DES DONNEES
-//
-.then(function(data){
+    //
+    //--- RECUPERATION DES DONNEES
+    //
+    .then(function(data){
 
-        //---------------------------------------------------//
-                        //-- FORMULAIRES --//
-        //---------------------------------------------------//
-        //--- SELECTEURS DOM
-        //
-        // NOM UTILISATEUR
-        let nameUser = document.getElementById("nom");
-        // MAIL UTILISATEUR
-        let mailUser = document.getElementById("email");
-        // TELEPHONE UTILISATEUR
-        let numberPhone = document.getElementById("number");
-        // TYPE LOGEMENTS
-        let logementZbnb = document.getElementById("logementsZbnb");
-        //Ajout resultat choix
-        let choixLogement = document.querySelector(".choix-logement");
-        // A VOIR SINON BOUCLE - A TESTER
-        let personneOne = document.getElementById("personneOne");
-        let personneTwo = document.getElementById("personneTwo");
-        let personneThree = document.getElementById("personneThree");
-        let personneFour = document.getElementById("personneFour");
-        // DATE
-        let dateDepart = document.querySelector(".dateDepart");
-        let dateArrive = document.querySelector(".dateArrive");
-        // CHAUFFEUR
-        let suppChauffeur = document.getElementById("suppChauffeur");
-        // PETIT DEJEUNER
-        let suppDejeuner = document.getElementById("suppDejeuner");
-        // GUIDE
-        let suppGuide = document.getElementById("suppGuide");
-        // REGIME ALIMENTAIRE
-        let regimeTrue = document.getElementById("regimeAlimentaireTrue");
-        let regimeFalse = document.getElementById("regimeAlimentaireFalse");
-        // OPTION AFFICHAGE REGIME
-        let regimeHidden = document.querySelector(".regime-hidden");
-        //--- AFFICHAGE RESULTAT COMMANDE RESERVATION
-        let resultReservation = document.querySelector(".resultat-reservation");
-        // BUTTON ENVOIE DU RESULTAT
-        let buttonFormulaire = document.getElementById("search");
-        //---------------------------------------------------//
-        //
-        //--- OPTIONS REGIME ALIMENTAIRE
-        suppDejeuner.addEventListener("click", function() {
-            
-            if (regimeHidden.style.display === "none") {
-                // AFFICHE LES OPTIONS
-                regimeHidden.style.display = "block";
-            } else {
-                // ENLEVE LES OPTIONS
-                regimeHidden.style.display = "none";
-            }
-        });
-        //---------------------------------------------------//
-                    //--- LOGEMENTS ---//
-        //---------------------------------------------------//
-        //
-        logementZbnb.addEventListener("change", function() {
+    //--- SELECTEURS DOM
+    //
+    let nameUser = document.getElementById("nom");
+    let mailUser = document.getElementById("email");
+    let numberPhone = document.getElementById("number");
+    let logementZbnb = document.getElementById("logementsZbnb");
+    let choixLogement = document.querySelector(".choix-logement");
+    //---------------------------------------------------------------//
+    //--- CHAUFFEUR
+    let suppChauffeur = document.getElementById("suppChauffeur");
+    //--- PETIT DEJEUNER
+    let suppDejeuner = document.getElementById("suppDejeuner");
+    //--- GUIDE
+    let suppGuide = document.getElementById("suppGuide");
+    //---------------------------------------------------------------//
+    //--- A FAIRE
+    //--- DATE
+    let dateDepart = document.getElementById("dateDepart");
+    let dateArrive = document.getElementById("dateArrive");
+    //---------------------------------------------------------------//
+    // OPTION AFFICHAGE REGIME
+    let regimeHidden = document.querySelector(".regime-hidden");
+    //--- AFFICHAGE RESULTAT COMMANDE RESERVATION
+    let resultReservation = document.querySelector(".resultat-reservation");
+    // BUTTON ENVOIE DU RESULTAT
+    let buttonFormulaire = document.getElementById("search");
+    //---------------------------------------------------//
+    //--- OPTIONS REGIME ALIMENTAIRE
+    suppDejeuner.addEventListener("click", function() {
+        if (regimeHidden.style.display === "none") {
+            //--- AFFICHE LES OPTIONS
+            regimeHidden.style.display = "block";
+        } else {
+            //--- ENLEVE LES OPTIONS
+            regimeHidden.style.display = "none";
+        }
+    });
+    //---------------------------------------------------//
+    //--- LOGEMENTS ---//
+    logementZbnb.addEventListener("change", function() {
 
-            let selectionChoix = logementZbnb.value;
+        let selectionChoix = logementZbnb.value;
 
-            if (selectionChoix === "maison") {
+        if (selectionChoix === "maison") {
 
-                let contentHtmlChoixMaison = `
-                <div class="choix-maison-option">
-                    <label for="pi">Piscine</label>
-                    <input type="checkbox" name="piscine" id="piscineMaison">
-                    <label for="pi">Jardin</label>
-                    <input type="checkbox" name="jardin" id="jardinMaison">
-                </div>`;
-                choixLogement.innerHTML = contentHtmlChoixMaison;
-            } else if (selectionChoix === "appartement") {
+            let contentHtmlChoixMaison = `
+            <div class="choix-maison-option">
+                <label for="pi">Piscine</label>
+                <input type="checkbox" name="Piscine" id="piscineMaison">
+                <label for="pi">Jardin</label>
+                <input type="checkbox" name="Jardin" id="jardinMaison">
+            </div>`;
+            //--- AJOUT BLOCK DANS DOM HTML
+            choixLogement.innerHTML = contentHtmlChoixMaison;
+        } else if (selectionChoix === "appartement") {
 
-                let contentHtmlChoixAppartement = `
-                <div class="choix-maison-option">
-                    <label for="balcon">Balcon</label>
-                    <input type="checkbox" name="balcon" id="balconAppartment">
-                    <label for="ascenceur">Ascenseur</label>
-                    <input type="checkbox" name="ascenceur" id="ascenceurAppartment">
-                </div>`;
-                choixLogement.innerHTML = contentHtmlChoixAppartement;
-            } else {
-                choixLogement.textContent = "";
-            }
-        });
-        //---------------------------------------------------//
-                //--- RECUPERATION VALEURS SAISIES ---//
-        //---------------------------------------------------//
+            let contentHtmlChoixAppartement = `
+            <div class="choix-maison-option">
+                <label for="balcon">Balcon</label>
+                <input type="checkbox" name="Balcon" id="balconAppartment">
+                <label for="ascenceur">Ascenseur</label>
+                <input type="checkbox" name="Ascenseur" id="ascenceurAppartment">
+            </div>`;
+            //--- AJOUT BLOCK DANS DOM HTML
+            choixLogement.innerHTML = contentHtmlChoixAppartement;
+        } else {
+            choixLogement.textContent = "Aucun logement sélectionné";
+        }
+    });
+    //---------------------------------------------------//
+    //--- RECUPERATION VALEURS SAISIES ---//
+    buttonFormulaire.addEventListener("click", function(event) {
+
+        //--- EVITE LE RAFRAICHISSEMENT
+        event.preventDefault();
+        //--- VIDER LE BLOCK HTML DOM
+        resultReservation.innerHTML = "";
+        //--- TABLEAU ERREUR VIDE
         let tableauError = [];
+        //--- SELECTION CHOIX LOGEMENT
+        let selectionChoix = logementZbnb.value;
+        //--- SELECTEUR HTML CHOIX LOGEMENT
+        let Options = document.querySelectorAll(".choix-logement input:checked");
+        //--- TABLEAU OPTIONS CHOISIS
+        let optionsChoisies = [];
+        //-- REGIME
+        let selectionRegime = document.querySelector('input[name="regime"]:checked');
 
+        //--- VERIFICATION LONGUEUR NOM
+        if(nameUser.value.length < 3) {
+            tableauError.push("Votre nom doit contenir au moins 3 caractères.");
+        }
+
+        //--- VERIFICATION EMAIL REGEX
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(mailUser.value)) {
+            tableauError.push("Adresse email invalide : " + mailUser.value);
+        }
 
-        //---- BOUTON FORMULAIRE
-        buttonFormulaire.addEventListener("click", function(event){
+        //--- VERIFICATION TELEPHONE SUR 10 CHIFFRES
+        let phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(numberPhone.value.trim())) {
+            tableauError.push("Numéro de téléphone invalide :" + numberPhone.value);
+        }
 
-            //--- Empeche le rechargement de la page
-            event.preventDefault();
+        //--- VERIF OPTIONS CHOISIES EN PARCOURANT LES CASES COCHEES
+        for (let i = 0; i < Options.length; i++) {
+            optionsChoisies.push(Options[i].name);
+        }
 
-            //--- TABLEAU ERREUR 
-            tableauError = [];
+        //--- SELECTION LOGEMENT
+        if (selectionChoix === "") {
+            tableauError.push("Veuillez sélectionner un logement.");
+        }
 
-            //--- VIDE LE CONTENU DU DOM SELECTOR HTML
-            resultReservation.innerHTML = "";
+        //--- SELECTION NOMBRE DE PERSONNE
+        let nbPersonnes = document.getElementById('nbPersonnes').value;
 
-            //--- VERIFICATION LONGUEUR NOM
-            if(nameUser.value.length < 3){tableauError.push("Votre nom doit contenir au moins 3 caractères.");}
+        //--- DATE
+        let departValue = dateDepart.value;
+        let arriveeValue = dateArrive.value;
 
-            //--- VERIFICATION MAIL REGEX
-            if(!emailRegex.test(mailUser.value)) {tableauError.push("Adresse email invalide: " + mailUser.value);}
+        // Vérification si les valeurs des dates sont vides
+        if (!departValue) {
+            tableauError.push("La date de départ est vide.");
+        }
+        if (!arriveeValue) {
+            tableauError.push("La date d'arrivée est vide.");
+        }
 
+        //--- CONVERTIR LA DATE
+        let depart = new Date(departValue);
+        let arrivee = new Date(arriveeValue);
 
+        //--- VERIFIER DATE
+        if (depart.toString() === "Invalid Date") {
+            tableauError.push("La date de départ est invalide.");
+        }
+        if (arrivee.toString() === "Invalid Date") {
+            tableauError.push("La date d'arrivée est invalide.");
+        }
 
+        //--- VERIFICATION SI DATE DE DEPART EST APRES DATE D'ARRIVEE
+        if (depart > arrivee) {
+            tableauError.push("La date de départ ne peut pas être après la date d'arrivée.");
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //---------------------------------------------------// 
-            //--- VERIFICATION DATA DANS TABLEAU ET AFFICHAGE
-            //
-            // ERREURS + AFFICHAGE
-            if (tableauError.length > 0) {
-
-                // VALEUR VIDE AU DEBUT
-                let errorList = "";
-            
-                // BOUCLE POUR RECUPERER LES ERREUR + AJOUT DATA DANS BALISE HTML
-                for (let i = 0; i < tableauError.length; i++) {
-                    errorList += `<li>${tableauError[i]}</li>`;
-                }
-            
-                //--- BLOCK HTML MESSAGE ERREUR
-                let contentHtmlResultat = `
-                    <h2 class="red-nok">Erreurs dans ce formulaire</h2>
-                    <ul>
-                        ${errorList}
-                    </ul>`;
-            
-                // AJOUT DANS DOM HTML
-                resultReservation.innerHTML = contentHtmlResultat;
-            
-            } else {
-            
-                //--- BLOCK HTML MESSAGE FORMULAIRE OK
-                let contentHtmlResultat = `
-                    <h2 class="green-ok">Résultat de votre commande</h2>
-                    <p>Votre nom: ${nameUser.value}</p>
-                    <p>Votre email: ${mailUser.value}</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                `;
-                //
-                //--- AJOUT DANS DOM HTML
-                resultReservation.innerHTML = contentHtmlResultat;
+        //--- CONTENU MESSAGE D'ERREUR
+        if (tableauError.length > 0) {
+            let errorList = "";
+            for (let i = 0; i < tableauError.length; i++) {
+                errorList += `<li>${tableauError[i]}</li>`;
             }
-        });
-        //
-        //--------------------------------------------------//
-        // LOCAL STORAGE A TESTER
-        // document.addEventListener("DOMContentLoaded", function(){
+            let contentHtmlErreur = `
+                <h2 class="red-nok">Erreurs dans ce formulaire</h2>
+                <ul>
+                    ${errorList}
+                </ul>`;
+            resultReservation.innerHTML = contentHtmlErreur;
+        } 
+        //--- CONTENU RESULTAT SANS ERREUR
+        else {
+            let contentHtmlResultat = ` 
+                <h2 class="green-ok">Résultat de votre commande</h2>
+                <p>Votre nom : ${nameUser.value}</p>
+                <p>Votre email : ${mailUser.value}</p>
+                <p>Votre numéro de téléphone : ${numberPhone.value}</p>
+                <p>Nombre de personnes : ${nbPersonnes}</p>
+                <p>Logement choisi : ${selectionChoix}</p>
+                <p>Date de départ: ${depart.toLocaleDateString()}</p>
+                <p>Date d'arrivée: ${arrivee.toLocaleDateString()}</p>
+                <p>Options choisies : `;
 
-        //     let saveName = localStorage.getItem("nom");
+            //--- AFFICHAGE DES OPTIONS CHOISIES
+            if (optionsChoisies.length > 0) {
+                contentHtmlResultat += optionsChoisies.join(", ");
+            } else {
+                contentHtmlResultat += "Aucune option sélectionnée";
+            }
 
-        //     if(saveName){
+            //--- AFFICHAGE OPTION CHAUFFEUR
+            if(suppChauffeur.checked){
+                contentHtmlResultat += ", " + suppChauffeur.name;
+            }
 
-        //         resultReservation.textContent = saveName;
+            //--- AFFICHAGE OPTION GUIDE
+            if(suppGuide.checked){
+                contentHtmlResultat += ", " + suppGuide.name;
+            }
 
-        //     }
+            //--- REGIME CHOIX
+            if (selectionRegime) {
+                contentHtmlResultat += ", Regime alimentaire : " + selectionRegime.value;
+            }
 
-        // });
-        //---------------------------------------------------//
+            //--- AJOUT PROGRESSIVE DES OPTIONS DANS LE RESULTAT OK
+            contentHtmlResultat += `</p>`;
+
+            //--- AJOUT BLOCK DANS DOM HTML
+            resultReservation.innerHTML = contentHtmlResultat;
+        }
+    });
+    //
     //-----------------------------------------------------------------------------//
-//                           PARTIE RECUPERATION DATA                              //
+    //---                           PARTIE RECUPERATION DATA                    ---//
     //-----------------------------------------------------------------------------//
     //--- SELECTEURS DOM
     // HOME PAGE
@@ -240,15 +250,13 @@ fetch( "zenbnb_listing_40.json" )
         //---                          BLOCK - HOME PAGE                            ---//
         //-----------------------------------------------------------------------------//
         //
-        // CREATION DIV POUR RATTACHER LES DONNEES
+        //--- CREATION DIV POUR RELIER LES DONNEES
         let divHomePage = document.createElement( "container" );
         //
-        //Ajout class pour logement
+        //--- AJOUT CLASS LOGEMENT
         divHomePage.classList = "logement";
         //
-        // RECUPERATION DES DATAS (Possible de concaténation)
-        // 
-        //  AUCUN FILTRE POUR LA HOME PAGE
+        //--- AFFICHAGE DE TOUS LES LOGEMENTS
         // 
         let htmlHomePage = "<img src='" + "./images/logement/logement.jpg" + "'/>";
         htmlHomePage += "<p>" + listingsAll.title;
